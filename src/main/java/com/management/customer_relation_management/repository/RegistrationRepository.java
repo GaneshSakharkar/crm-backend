@@ -65,8 +65,8 @@ public interface RegistrationRepository extends JpaRepository<RegistrationForm, 
     @Query(value = """
     	    SELECT *
 FROM crm.registration_form
-WHERE STR_TO_DATE(deu_date, '%Y-%m-%d %H:%i') <= '2025-07-25'
-ORDER BY STR_TO_DATE(deu_date, '%Y-%m-%d %H:%i') ASC
+WHERE STR_TO_DATE(deu_date, '%Y-%m-%d %H:%i') BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 1 MONTH)
+ORDER BY STR_TO_DATE(deu_date, '%Y-%m-%d %H:%i') ASC;
     	""", nativeQuery = true)
     	List<RegistrationForm> findAllDueEntries();
 
